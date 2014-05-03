@@ -20,6 +20,7 @@ import sjsu.cmpe282.webcawler.dao.ResumeDao;
 import sjsu.cmpe282.webcawler.db.DBConnecter;
 import sjsu.cmpe282.webcawler.model.JobTitle;
 import sjsu.cmpe282.webcawler.model.Resume;
+import sjsu.cmpe282.webcawler.util.PDFConverter;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
@@ -39,10 +40,11 @@ public class ResumeCrawler {
 
 	public static void main(String[] args) throws InterruptedException {
 		ResumeCrawler crawler = new ResumeCrawler();
-		String [] keywords = {"engineer","software","java","education","developer","trainer","analyst","association","coordinator"};
+		/*String [] keywords = {"engineer","software","java","education","developer","trainer","analyst","association","coordinator"};
 		String [] keywordss = {"development","employment",
 				"facilitator","international","management","research","therapist",
-				"non-profit","planning","LMSW","LSW","human-services","chemical-dependency"};
+				"non-profit","planning","LMSW","LSW","human-services","chemical-dependency"};*/
+		
 		ArrayList<JobTitle> jobTitleList = crawler.jDao.getTitleList();
 		
 		try {
@@ -51,6 +53,17 @@ public class ResumeCrawler {
 			e.printStackTrace();
 		}
 		System.out.println("------------------Dowanload Completed---------------------------");
+		
+		
+		
+		try {
+			PDFConverter.converTo("D:\\Documents\\KuaiPan\\resume-dataset-pdf", "D:\\Documents\\KuaiPan\\resume-dataset-txt");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("[convert error]");
+		}
+		
+		System.out.println("------------------Convert Completed---------------------------");
 	}
 
 	public void init() {
@@ -112,7 +125,7 @@ public class ResumeCrawler {
 				try {
 					System.out.println(String.format("page url --->[%s]",resumePageUrl.getResumePageUrl()));
 					System.out.println(String.format("----------------page start from [%s]-------------------",pageStart));
-					downloadAllResumeInOnePage(resumePageUrl.getResumePageUrl(),"D:\\Documents\\KuaiPan\\resume-dataset");
+					downloadAllResumeInOnePage(resumePageUrl.getResumePageUrl(),"D:\\Documents\\KuaiPan\\resume-dataset-pdf");
 					pageStart += 50;
 					resumePageUrl.setUrlParametersPageSize(pageStart);
 				} catch (Exception e) {
