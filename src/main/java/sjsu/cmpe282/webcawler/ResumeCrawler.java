@@ -132,6 +132,9 @@ public class ResumeCrawler {
 					e.printStackTrace();
 				}
 			}
+			
+			// after download all resume in one page, set this job_title to "isCrawled = 1"
+			jDao.updateIsCrawled(1, j.getId());
 		}
 		
 	}
