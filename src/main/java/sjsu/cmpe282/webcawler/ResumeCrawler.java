@@ -143,13 +143,16 @@ public class ResumeCrawler {
 	 * download all resume in one page
 	 */
 	public void downloadAllResumeInOnePage(String pageUrl, String destPath) {
+		File destDir = new File(destPath);
+		if(!destDir.exists()) destDir.mkdir();
+		
 		ArrayList<Resume> resumes = getPageResumesList(pageUrl);
 		for(Resume r : resumes){
 			try {
 				downloadSingleResume( r, destPath);
 				if(rd.storeResumes(r) == 1) System.out.println("store resume into mysql successfully");
 				counter++;
-				Thread.sleep(1000 * 3);
+				Thread.sleep(1000 * 2);
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println(String.format("file download failed"));

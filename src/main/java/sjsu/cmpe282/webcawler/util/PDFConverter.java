@@ -10,10 +10,10 @@ import org.apache.pdfbox.util.PDFTextStripper;
 
 public class PDFConverter {
 
-	public static void main(String[] args) throws Exception {
+/*	public static void main(String[] args) throws Exception {
 		converTo("D:\\Documents\\KuaiPan\\resume-dataset-pdf",
 				"D:\\Documents\\KuaiPan\\resume-dataset-txt");
-	}
+	}*/
 
 	public static void converTo(String source, String dest) throws Exception{
 		File sourceDir = new File(source);

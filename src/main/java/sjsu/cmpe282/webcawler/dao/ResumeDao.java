@@ -19,7 +19,7 @@ public class ResumeDao {
 	public int storeResumes(Resume r){
 		PreparedStatement ps = null;
 		try {
-			ps = con.prepareStatement("insert into resume (resume_id, resume_name, resume_download_link,resume_link) value(?,?,?,?)");
+			ps = con.prepareStatement("insert into resumes (resume_id, resume_name, resume_download_link,resume_link) value(?,?,?,?)");
 			ps.setString(1, r.getResumeid());
 			ps.setString(2, r.getResumeName());
 			ps.setString(3, r.getResumeDownloadLink());
